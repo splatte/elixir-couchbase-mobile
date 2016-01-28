@@ -1,0 +1,2 @@
+defmodule CouchbaseMobile do
+end
