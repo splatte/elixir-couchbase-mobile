@@ -1,0 +1,26 @@
+[
+  {
+    "request": {
+      "body": "{\"likes\":3,\"comments\":5}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "put",
+      "options": [],
+      "request_body": "",
+      "url": "http://127.0.0.1:4984/defaultbucket/new_document_with_id"
+    },
+    "response": {
+      "body": "{\"id\":\"new_document_with_id\",\"ok\":true,\"rev\":\"1-4f3ba7ab7d961d7f6fd147692e3b63e2\"}",
+      "headers": {
+        "Content-Length": "82",
+        "Content-Type": "application/json",
+        "Etag": "\"1-4f3ba7ab7d961d7f6fd147692e3b63e2\"",
+        "Server": "Couchbase Sync Gateway/1.1.1",
+        "Date": "Tue, 02 Feb 2016 11:37:15 GMT"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  }
+]
