@@ -6,9 +6,11 @@ defmodule CouchbaseMobile do
   end
 
   def process_response_body(body) do
-    body
-      |> IO.iodata_to_binary
-      |> read_json
+    binary_body = body |> IO.iodata_to_binary
+    case binary_body  do
+      "" -> binary_body
+      _ -> binary_body |> read_json
+    end
   end
 
   def http(verb, url, params \\ "") do
@@ -75,6 +77,50 @@ defmodule CouchbaseMobile do
   end
 
   defmodule AdminGW do
-    defdelegate create_user(), to: CouchbaseMobile.AdminAPI.User
+    def base_url, do: "http://#{Application.get_env(:couchbase_mobile, :syncgw_host)}:#{Application.get_env(:couchbase_mobile, :syncgw_admin_port)}"
+
+    def request(verb, endpoint, params \\ "") do
+      CouchbaseMobile.http(verb, base_url <> endpoint, params)
+    end
+
+    @doc """
+    Create a new user.
+
+    ## Reference
+    http://developer.couchbase.com/documentation/mobile/1.1.0/develop/references/sync-gateway/admin-rest-api/user/post-user/index.html
+    """
+    defdelegate create_user(name, password, user_extras), to: CouchbaseMobile.AdminAPI.User
+
+    @doc """
+    Update an existing user.
+
+    ## Reference
+    http://developer.couchbase.com/documentation/mobile/1.1.0/develop/references/sync-gateway/admin-rest-api/user/put-user/index.html
+    """
+    defdelegate update_user(name, user_extras), to: CouchbaseMobile.AdminAPI.User
+
+    @doc """
+    Get the specified user.
+
+    ## Reference
+    http://developer.couchbase.com/documentation/mobile/1.1.0/develop/references/sync-gateway/admin-rest-api/user/get-user/index.html
+    """
+    defdelegate get_user(name), to: CouchbaseMobile.AdminAPI.User
+
+    @doc """
+    Delete a user.
+
+    ## Reference
+    http://developer.couchbase.com/documentation/mobile/1.1.0/develop/references/sync-gateway/admin-rest-api/user/delete-user/index.html
+    """
+    defdelegate delete_user(name), to: CouchbaseMobile.AdminAPI.User
+
+    @doc """
+    Get the list of users.
+
+    ## Reference
+    http://developer.couchbase.com/documentation/mobile/1.1.0/develop/references/sync-gateway/admin-rest-api/user/get-user-list/index.html
+    """
+    defdelegate get_users(), to: CouchbaseMobile.AdminAPI.User
   end
 end

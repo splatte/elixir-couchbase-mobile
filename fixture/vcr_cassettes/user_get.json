@@ -1,0 +1,25 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "http://127.0.0.1:4985/defaultbucket/_user/alice"
+    },
+    "response": {
+      "body": "{\"name\":\"alice\",\"all_channels\":[\"!\"]}",
+      "headers": {
+        "Server": "Couchbase Sync Gateway/1.1.1",
+        "Date": "Tue, 02 Feb 2016 20:30:53 GMT",
+        "Content-Length": "37",
+        "Content-Type": "text/plain; charset=utf-8"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

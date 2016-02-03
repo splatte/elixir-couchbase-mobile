@@ -1,0 +1,48 @@
+[
+  {
+    "request": {
+      "body": "{\"email\":\"me@alice.com\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "put",
+      "options": [],
+      "request_body": "",
+      "url": "http://127.0.0.1:4985/defaultbucket/_user/alice"
+    },
+    "response": {
+      "body": "",
+      "headers": {
+        "Server": "Couchbase Sync Gateway/1.1.1",
+        "Date": "Wed, 03 Feb 2016 19:37:27 GMT",
+        "Content-Length": "0",
+        "Content-Type": "text/plain; charset=utf-8"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "http://127.0.0.1:4985/defaultbucket/_user/alice"
+    },
+    "response": {
+      "body": "{\"name\":\"alice\",\"all_channels\":[\"!\"],\"email\":\"me@alice.com\"}",
+      "headers": {
+        "Server": "Couchbase Sync Gateway/1.1.1",
+        "Date": "Wed, 03 Feb 2016 19:37:27 GMT",
+        "Content-Length": "60",
+        "Content-Type": "text/plain; charset=utf-8"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

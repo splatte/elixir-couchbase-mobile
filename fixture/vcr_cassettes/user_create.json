@@ -1,0 +1,25 @@
+[
+  {
+    "request": {
+      "body": "{\"password\":\"secret\",\"name\":\"alice\"}",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://127.0.0.1:4985/defaultbucket/_user/"
+    },
+    "response": {
+      "body": "",
+      "headers": {
+        "Server": "Couchbase Sync Gateway/1.1.1",
+        "Date": "Tue, 02 Feb 2016 19:49:08 GMT",
+        "Content-Length": "0",
+        "Content-Type": "text/plain; charset=utf-8"
+      },
+      "status_code": 201,
+      "type": "ok"
+    }
+  }
+]
