@@ -1,32 +1,19 @@
 defmodule CouchbaseMobile do
-  use HTTPotion.Base
+  use HTTPoison.Base
 
   def process_request_headers(headers) do
     Dict.put(headers, :"Content-Type", "application/json")
   end
 
-  def process_response_body(body) do
-    binary_body = body |> IO.iodata_to_binary
-    case binary_body  do
-      "" -> binary_body
-      _ -> binary_body |> read_json
-    end
-  end
+  def process_response_body(body), do: body |> read_json
 
-  def http(verb, url, params \\ "") do
-    case params do
-      "" -> apply(CouchbaseMobile, verb, [url])
-      _  -> apply(CouchbaseMobile, verb, [url, [body: params |> write_json]])
-    end
-  end
+  def http(verb, url, ""),     do: apply(CouchbaseMobile, verb, [url])
+  def http(verb, url, params), do: apply(CouchbaseMobile, verb, [url, params |> write_json])
 
-  defp read_json(data) do
-    data |> Poison.decode!
-  end
+  defp read_json(""),    do: ""
+  defp read_json(data),  do: data |> Poison.decode!
 
-  def write_json(data) do
-    data |> Poison.encode!
-  end
+  defp write_json(data), do: data |> Poison.encode!
 
   defmodule SyncGW do
     def base_url, do: "http://#{Application.get_env(:couchbase_mobile, :syncgw_host)}:#{Application.get_env(:couchbase_mobile, :syncgw_port)}"
