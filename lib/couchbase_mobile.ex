@@ -52,7 +52,8 @@ defmodule CouchbaseMobile do
     ## Reference
     http://developer.couchbase.com/documentation/mobile/1.1.0/develop/references/sync-gateway/rest-api/document/get---db---doc-/index.html
     """
-    defdelegate get_document(id), to: CouchbaseMobile.API.Document
+    defdelegate get_document(id),      to: CouchbaseMobile.API.Document
+    defdelegate get_document(id, rev), to: CouchbaseMobile.API.Document
 
     @doc """
     Deletes a document.

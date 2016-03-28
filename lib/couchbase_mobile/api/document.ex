@@ -29,6 +29,10 @@ defmodule CouchbaseMobile.API.Document do
     SyncGW.request(:get, endpoint <> id)
   end
 
+  def get_document(id, rev) do
+    SyncGW.request(:get, endpoint <> id <> "?rev=#{rev}")
+  end
+
   def delete_document(id, rev) do
     SyncGW.request(:delete, endpoint <> id <> "?rev=#{rev}")
   end

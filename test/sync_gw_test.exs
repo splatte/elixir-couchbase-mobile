@@ -7,7 +7,6 @@ defmodule CouchbaseMobile.SyncGWTest do
   test "document POST" do
     use_cassette "document_create" do
       {:ok, %HTTPoison.Response{:body => json}} = SyncGW.create_document(%{"hello" => "world", "count" => 5})
-
       assert Map.has_key? json, "id"
       assert Map.has_key? json, "rev"
       assert json["ok"] == true
@@ -17,7 +16,6 @@ defmodule CouchbaseMobile.SyncGWTest do
   test "document PUT new" do
     use_cassette "document_create_with_id" do
       {:ok, %HTTPoison.Response{:body => json}} = SyncGW.create_document("new_document_with_id", %{"likes" => 3, "comments" => 5})
-
       assert json["id"] == "new_document_with_id"
       assert json["ok"] == true
     end
@@ -29,7 +27,6 @@ defmodule CouchbaseMobile.SyncGWTest do
       current_rev = "1-00758affb49955e3ac41b11bb35667fa"
 
       {:ok, %HTTPoison.Response{:body => json}} = SyncGW.update_document("c6a83216f25cd4adf00bfa2d729aef02", current_rev, updated_doc)
-
       assert json["_rev"] != current_rev
       assert json["ok"] == true
     end
@@ -38,7 +35,6 @@ defmodule CouchbaseMobile.SyncGWTest do
   test "document GET" do
     use_cassette "document_get" do
       {:ok, %HTTPoison.Response{:body => json}} = SyncGW.get_document("c6a83216f25cd4adf00bfa2d729aef02")
-
       assert json["_id"] == "c6a83216f25cd4adf00bfa2d729aef02"
       assert json["hello"] == "world"
       assert json["count"] == 5
@@ -48,9 +44,17 @@ defmodule CouchbaseMobile.SyncGWTest do
   test "document GET 404" do
     use_cassette "document_get_404" do
       {:ok, response} = SyncGW.get_document("this_doc_id_does_not_exist")
-
       assert response.status_code == 404
       assert response.body["error"] == "not_found"
+    end
+  end
+
+  test "document GET with revision" do
+    use_cassette "document_get_revision" do
+      {:ok, %HTTPoison.Response{:body => json}} = SyncGW.get_document("c6a83216f25cd4adf00bfa2d729aef02", "2-530ffe2baca37c901cb750201639440d")
+      assert json["_id"] == "c6a83216f25cd4adf00bfa2d729aef02"
+      assert json["_rev"] == "2-530ffe2baca37c901cb750201639440d"
+      assert json["count"] == 200
     end
   end
 
