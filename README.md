@@ -1,15 +1,18 @@
-# CouchbaseMobile
+# Elixir Couchbase Mobile
 
-**TODO: Add description**
+Elixir library to talk to Couchbase Mobile Sync Gateway using the REST API.
+
+Only a small subset of functionality is supported at the moment, namely:
+
+  * document manipulation
+  * user management
 
 ## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
 
   1. Add couchbase_mobile to your list of dependencies in `mix.exs`:
 
         def deps do
-          [{:couchbase_mobile, "~> 0.0.1"}]
+          [{:couchbase_mobile, github: "splatte/elixir-couchbase-mobile", branch: "master"}]
         end
 
   2. Ensure couchbase_mobile is started before your application:
@@ -18,3 +21,10 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
           [applications: [:couchbase_mobile]]
         end
 
+  3. Update config file in `config/` relevant for your environment:
+
+        config :couchbase_mobile,
+          syncgw_host: "127.0.0.1",
+          syncgw_port: 4984,
+          syncgw_admin_port: 4985,
+          syncgw_bucket: "defaultbucket"
